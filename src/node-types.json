@@ -8,22 +8,15 @@
       "required": true,
       "types": [
         {
-          "type": "parameter",
+          "type": "int_literal",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "condition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
+        },
         {
-          "type": "if_fail",
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
           "named": true
         }
       ]
@@ -38,7 +31,15 @@
       "required": true,
       "types": [
         {
-          "type": "parameter",
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
           "named": true
         }
       ]
@@ -46,145 +47,6 @@
   },
   {
     "type": "echo_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "exit_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "goto_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "if_fail",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "add_widget_statement",
-          "named": true
-        },
-        {
-          "type": "condition",
-          "named": true
-        },
-        {
-          "type": "copy_statement",
-          "named": true
-        },
-        {
-          "type": "echo_statement",
-          "named": true
-        },
-        {
-          "type": "exit_statement",
-          "named": true
-        },
-        {
-          "type": "goto_statement",
-          "named": true
-        },
-        {
-          "type": "loadexec_statement",
-          "named": true
-        },
-        {
-          "type": "message_statement",
-          "named": true
-        },
-        {
-          "type": "redirfile_statement",
-          "named": true
-        },
-        {
-          "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "rrm_statement",
-          "named": true
-        },
-        {
-          "type": "set_statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "label",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "loadexec_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "message_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "parameter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "parameter",
     "named": true,
     "fields": {},
     "children": {
@@ -207,6 +69,313 @@
     }
   },
   {
+    "type": "elseif",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "add_widget_statement",
+          "named": true
+        },
+        {
+          "type": "copy_statement",
+          "named": true
+        },
+        {
+          "type": "echo_statement",
+          "named": true
+        },
+        {
+          "type": "equ_token",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "fail_token",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "loadexec_statement",
+          "named": true
+        },
+        {
+          "type": "matches_token",
+          "named": true
+        },
+        {
+          "type": "message_statement",
+          "named": true
+        },
+        {
+          "type": "neq_token",
+          "named": true
+        },
+        {
+          "type": "pattern_literal",
+          "named": true
+        },
+        {
+          "type": "redirfile_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "rrm_statement",
+          "named": true
+        },
+        {
+          "type": "set_statement",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exit_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "goto_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "add_widget_statement",
+          "named": true
+        },
+        {
+          "type": "copy_statement",
+          "named": true
+        },
+        {
+          "type": "echo_statement",
+          "named": true
+        },
+        {
+          "type": "elseif",
+          "named": true
+        },
+        {
+          "type": "equ_token",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "fail_token",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "loadexec_statement",
+          "named": true
+        },
+        {
+          "type": "matches_token",
+          "named": true
+        },
+        {
+          "type": "message_statement",
+          "named": true
+        },
+        {
+          "type": "neq_token",
+          "named": true
+        },
+        {
+          "type": "pattern_literal",
+          "named": true
+        },
+        {
+          "type": "redirfile_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "rrm_statement",
+          "named": true
+        },
+        {
+          "type": "set_statement",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "label",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "loadexec_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "message_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pattern_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "pattern_wildcard",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pattern_wildcard",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "redirfile_statement",
     "named": true,
     "fields": {},
@@ -215,7 +384,15 @@
       "required": true,
       "types": [
         {
-          "type": "parameter",
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
           "named": true
         }
       ]
@@ -230,7 +407,15 @@
       "required": true,
       "types": [
         {
-          "type": "parameter",
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
           "named": true
         }
       ]
@@ -245,7 +430,15 @@
       "required": true,
       "types": [
         {
-          "type": "parameter",
+          "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
           "named": true
         }
       ]
@@ -260,11 +453,15 @@
       "required": true,
       "types": [
         {
-          "type": "parameter",
+          "type": "int_literal",
           "named": true
         },
         {
           "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "variable_literal",
           "named": true
         }
       ]
@@ -284,10 +481,6 @@
           "named": true
         },
         {
-          "type": "condition",
-          "named": true
-        },
-        {
           "type": "copy_statement",
           "named": true
         },
@@ -301,6 +494,10 @@
         },
         {
           "type": "goto_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
           "named": true
         },
         {
@@ -363,7 +560,15 @@
     "named": false
   },
   {
+    "type": "*",
+    "named": false
+  },
+  {
     "type": ":",
+    "named": false
+  },
+  {
+    "type": "?",
     "named": false
   },
   {
@@ -379,15 +584,15 @@
     "named": false
   },
   {
+    "type": "ELSEIF",
+    "named": false
+  },
+  {
     "type": "ENDIF",
     "named": false
   },
   {
     "type": "EXIT",
-    "named": false
-  },
-  {
-    "type": "FAIL",
     "named": false
   },
   {
@@ -427,7 +632,23 @@
     "named": true
   },
   {
+    "type": "equ_token",
+    "named": true
+  },
+  {
+    "type": "fail_token",
+    "named": true
+  },
+  {
     "type": "int_literal",
+    "named": true
+  },
+  {
+    "type": "matches_token",
+    "named": true
+  },
+  {
+    "type": "neq_token",
     "named": true
   }
 ]

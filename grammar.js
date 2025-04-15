@@ -18,7 +18,7 @@ module.exports = grammar({
     _line: ($) => choice($.label, $._statement),
     _statement: ($) =>
       choice(
-        $.condition,
+        $.if_statement,
         $.set_statement,
         $.message_statement,
         $.echo_statement,
@@ -31,17 +31,51 @@ module.exports = grammar({
     variable_literal: ($) => seq("$", /[a-zA-Z0-9._]+/, "$"),
     comment: ($) => token(seq("#", /.*/, repeat(/[\n\r]/))),
 
-    condition: ($) => choice($.if_fail),
-
-    if_fail: ($) =>
+    if_statement: ($) =>
       seq(
         "IF",
-        "FAIL",
-        $._statement,
-        $._whitespace,
-        repeat(seq($._statement, $._whitespace)),
+        choice($._if_fail, $._if_neq, $._if_equ, $._if_matches),
+        optional($.elseif),
         "ENDIF",
       ),
+
+    elseif: ($) =>
+      seq("ELSEIF", choice($._if_fail, $._if_neq, $._if_equ, $._if_matches)),
+
+    _if_fail: ($) =>
+      seq($.fail_token, $._statement, $._whitespace, $._statement_block),
+    _if_neq: ($) =>
+      seq(
+        $.neq_token,
+        $._parameter,
+        $._parameter,
+        $._whitespace,
+        $._statement_block,
+      ),
+    _if_equ: ($) =>
+      seq(
+        $.equ_token,
+        $._parameter,
+        $._parameter,
+        $._whitespace,
+        $._statement_block,
+      ),
+    _if_matches: ($) =>
+      seq(
+        $.matches_token,
+        $.pattern_literal,
+        $._parameter,
+        $._whitespace,
+        $._statement_block,
+      ),
+
+    fail_token: ($) => "FAIL",
+    neq_token: ($) => "NEQ",
+    equ_token: ($) => "EQU",
+    matches_token: ($) => "MATCHES",
+
+    _statement_block: ($) =>
+      choice(repeat1(seq($._statement, $._whitespace)), $._whitespace),
 
     _file_statement: ($) =>
       choice(
@@ -50,25 +84,32 @@ module.exports = grammar({
         $.redirfile_statement,
         $.loadexec_statement,
       ),
-    rrm_statement: ($) => seq("RRM", $.parameter),
-    copy_statement: ($) => seq("COPY", $.parameter, $.parameter),
-    redirfile_statement: ($) => seq("REDIRFILE", $.parameter, $.parameter),
-    loadexec_statement: ($) => seq("LOADEXEC", repeat1($.parameter)),
+    rrm_statement: ($) => seq("RRM", $._parameter),
+    copy_statement: ($) => seq("COPY", $._parameter, $._parameter),
+    redirfile_statement: ($) => seq("REDIRFILE", $._parameter, $._parameter),
+    loadexec_statement: ($) => seq("LOADEXEC", repeat1($._parameter)),
 
-    add_widget_statement: ($) => seq("ADDWIDGET", repeat1($.parameter)),
-    exit_statement: ($) => seq("EXIT", $.parameter),
-    set_statement: ($) => seq("SET", $.string_literal, $.parameter),
-    message_statement: ($) => seq("MESSAGE", $.parameter),
-    echo_statement: ($) => seq("ECHO", $.parameter),
-    return_statement: ($) => seq("RETURN", $.parameter),
-    goto_statement: ($) => seq("GOTO", $.parameter),
+    add_widget_statement: ($) => seq("ADDWIDGET", repeat1($._parameter)),
+    exit_statement: ($) => seq("EXIT", $._parameter),
+    set_statement: ($) => seq("SET", $.string_literal, $._parameter),
+    message_statement: ($) => seq("MESSAGE", $._parameter),
+    echo_statement: ($) => seq("ECHO", $._parameter),
+    return_statement: ($) => seq("RETURN", $._parameter),
+    goto_statement: ($) => seq("GOTO", $._parameter),
 
-    parameter: ($) =>
+    _parameter: ($) =>
       choice($.variable_literal, $.string_literal, $.int_literal),
     label: ($) => seq(":", /[A-Z_0-9]+/),
 
     string_literal: ($) =>
       seq('"', repeat(choice(/[^"$]*/, $.variable_literal)), '"'),
+    pattern_literal: ($) =>
+      seq(
+        '"',
+        repeat(choice(/[^"?*$]*/, $.pattern_wildcard, $.variable_literal)),
+        '"',
+      ),
+    pattern_wildcard: ($) => choice("?", "*"),
     int_literal: ($) => /-?[0-9]+/,
 
     _whitespace: ($) => repeat1(/[\n\r]/),
